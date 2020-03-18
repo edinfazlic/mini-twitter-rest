@@ -1,9 +1,9 @@
 package com.minitwitter.controller;
 
-import com.minitwitter.controller.dto.ErrorMessage;
+import com.minitwitter.domain.dto.ErrorMessage;
 import com.minitwitter.domain.Tweet;
 import com.minitwitter.repository.TweetRepository;
-import com.minitwitter.service.dto.TweetDTO;
+import com.minitwitter.domain.dto.TweetDTO;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,7 +34,7 @@ public class TweetControllerIntegrationTest extends RestIntegrationTest {
   }
 
   private ResponseEntity<TweetDTO> doCreateTweetRequest(String tweetContent) {
-   return withAuthTestRestTemplate().postForEntity("/tweets", tweetContent, TweetDTO.class);
+    return withAuthTestRestTemplate().postForEntity("/tweets", tweetContent, TweetDTO.class);
   }
 
   @Test
@@ -67,7 +67,7 @@ public class TweetControllerIntegrationTest extends RestIntegrationTest {
     assertThat(authors, contains(getUsernameOfAuthUser()));
   }
 
-@Test
+  @Test
   public void tweetsFromUserWithWrongUsername_badRequestReturned() {
     ResponseEntity<ErrorMessage> response = withAuthTestRestTemplate().getForEntity("/tweets/{username}",
       ErrorMessage.class, Collections.singletonMap("username", "unknown"));

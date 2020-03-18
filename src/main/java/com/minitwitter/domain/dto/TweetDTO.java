@@ -1,7 +1,8 @@
-package com.minitwitter.service.dto;
+package com.minitwitter.domain.dto;
 
 import com.minitwitter.domain.Tweet;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import static lombok.AccessLevel.PRIVATE;
 

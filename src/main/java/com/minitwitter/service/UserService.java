@@ -2,7 +2,7 @@ package com.minitwitter.service;
 
 import com.minitwitter.domain.User;
 import com.minitwitter.repository.UserRepository;
-import com.minitwitter.service.dto.UserDTO;
+import com.minitwitter.domain.dto.UserDTO;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,7 +28,7 @@ public class UserService implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     User user = getUser(username);
-    if(user == null)
+    if (user == null)
       throw new UsernameNotFoundException(username);
     return user;
   }

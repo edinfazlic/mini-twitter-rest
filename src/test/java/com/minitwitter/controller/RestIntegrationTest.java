@@ -19,11 +19,11 @@ public abstract class RestIntegrationTest {
     return testRestTemplate.withBasicAuth("aantonop", "password");
   }
 
-  String getUsernameOfAuthUser(){
+  String getUsernameOfAuthUser() {
     return "aantonop";
   }
 
-  String[] followingUsers(){
+  String[] followingUsers() {
     return new String[]{"rogerkver", "satoshiNakamoto", "SatoshiLite", "VitalikButerin"};
   }
 }
