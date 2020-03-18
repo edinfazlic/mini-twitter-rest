@@ -25,12 +25,12 @@ public class MiniTwitterApplicationTests {
   @Autowired
   private TweetRepository tweetRepository;
 
-	@Test
+  @Test
   @Transactional
-	public void bootstrapDataIsLoaded_followersAreConnected() {
+  public void bootstrapDataIsLoaded_followersAreConnected() {
     User aantrop = userRepository.findOneByUsername("aantonop");
     assertThat(aantrop.getFollowers(), hasSize(1));
     assertThat(aantrop.getFollowing(), hasSize(4));
-	  assertThat(tweetRepository.count(), equalTo(8L));
-	}
+    assertThat(tweetRepository.count(), equalTo(8L));
+  }
 }

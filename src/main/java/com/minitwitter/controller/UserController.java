@@ -1,7 +1,7 @@
 package com.minitwitter.controller;
 
 import com.minitwitter.service.UserService;
-import com.minitwitter.service.dto.UserDTO;
+import com.minitwitter.domain.dto.UserDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

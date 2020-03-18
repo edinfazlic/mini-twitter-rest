@@ -1,4 +1,4 @@
-package com.minitwitter.controller.dto;
+package com.minitwitter.domain.dto;
 
 import lombok.Value;
 

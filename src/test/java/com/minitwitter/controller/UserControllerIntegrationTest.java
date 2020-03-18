@@ -1,6 +1,6 @@
 package com.minitwitter.controller;
 
-import com.minitwitter.service.dto.UserDTO;
+import com.minitwitter.domain.dto.UserDTO;
 import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 
@@ -8,7 +8,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class UserControllerIntegrationTest extends RestIntegrationTest {

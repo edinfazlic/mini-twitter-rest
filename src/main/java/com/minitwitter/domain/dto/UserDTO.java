@@ -1,4 +1,4 @@
-package com.minitwitter.service.dto;
+package com.minitwitter.domain.dto;
 
 import com.minitwitter.domain.User;
 import lombok.Getter;

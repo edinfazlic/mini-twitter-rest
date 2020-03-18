@@ -4,7 +4,7 @@ import com.minitwitter.domain.Tweet;
 import com.minitwitter.domain.User;
 import com.minitwitter.repository.TweetRepository;
 import com.minitwitter.repository.UserRepository;
-import com.minitwitter.service.dto.TweetDTO;
+import com.minitwitter.domain.dto.TweetDTO;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
 
@@ -42,13 +42,13 @@ public class TweetService {
   public TweetDTO createTweet(String tweetContent, Principal principal) {
     User user = getUser(principal);
     Tweet tweet = new Tweet(tweetContent, user);
-    if(!tweet.isValid())
+    if (!tweet.isValid())
       throw new InvalidTweetException(tweetContent);
     Tweet saved = tweetRepository.save(tweet);
     return new TweetDTO(saved);
   }
 
-  private User getUser(Principal principal){
+  private User getUser(Principal principal) {
     return userRepository.findOneByUsername(principal.getName());
   }
 
@@ -72,7 +72,7 @@ public class TweetService {
   public static class InvalidTweetException extends RuntimeException {
 
     private InvalidTweetException(String tweet) {
-      super("'" +  tweet + "'");
+      super("'" + tweet + "'");
     }
   }
 }
