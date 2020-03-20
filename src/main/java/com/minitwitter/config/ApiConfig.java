@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ApiConfig {
 
-    @Value("${CLIENT_ENVIRONMENT:http://localhost:4200}")
-    private String clientEnvironment;
+  @Value("${CLIENT_ENVIRONMENT:http://localhost:4200}")
+  private String clientEnvironment;
 
 }

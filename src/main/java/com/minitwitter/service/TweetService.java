@@ -5,7 +5,6 @@ import com.minitwitter.domain.User;
 import com.minitwitter.domain.dto.TweetDTO;
 import com.minitwitter.repository.TweetRepository;
 import com.minitwitter.repository.UserRepository;
-import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;

@@ -3,11 +3,13 @@ package com.minitwitter.domain.dto;
 import com.minitwitter.domain.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import static lombok.AccessLevel.PRIVATE;
+import static lombok.AccessLevel.PROTECTED;
 
 @Getter
-@NoArgsConstructor(access = PRIVATE)
+@Setter
+@NoArgsConstructor(access = PROTECTED)
 public class UserDTO {
   private Long id;
   private String username;

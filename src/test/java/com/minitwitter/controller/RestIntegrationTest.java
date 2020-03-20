@@ -25,6 +25,10 @@ public abstract class RestIntegrationTest {
     return testRestTemplate.withBasicAuth(AUTH_USERNAME, "password");
   }
 
+  TestRestTemplate withoutAuthTestRestTemplate() {
+    return testRestTemplate;
+  }
+
   String getUsernameOfAuthUser() {
     return AUTH_USERNAME;
   }
