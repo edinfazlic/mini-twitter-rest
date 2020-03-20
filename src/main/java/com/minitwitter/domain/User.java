@@ -41,6 +41,12 @@ public class User implements UserDetails {
   @Column(unique = true)
   private String username;
 
+  @Column
+  private String firstName;
+
+  @Column
+  private String lastName;
+
   @JsonIgnore
   @ManyToMany
   private Set<User> following = new HashSet<>();
@@ -52,9 +58,11 @@ public class User implements UserDetails {
   @JsonIgnore
   private String password;
 
-  public User(String username, String password) {
+  public User(String username, String password, String firstName, String lastName) {
     this.username = username;
     this.password = password;
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
 
   public void addFollowing(User... users) {
@@ -85,5 +93,9 @@ public class User implements UserDetails {
   @Override
   public boolean isEnabled() {
     return true;
+  }
+
+  public String getFormattedString() {
+    return firstName + (lastName == null || lastName.isEmpty() ? "" : " " + lastName) + " (" + username + ")";
   }
 }
