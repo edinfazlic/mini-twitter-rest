@@ -21,8 +21,8 @@ public class UserControllerIntegrationTest extends RestIntegrationTest {
     ResponseEntity<UserDTO[]> response = withAuthTestRestTemplate().getForEntity("/followers", UserDTO[].class);
     assertThat(response.getStatusCode().is2xxSuccessful(), is(true));
     List<UserDTO> followers = Arrays.asList(response.getBody());
-    assertThat(followers, hasSize(1));
-    assertThat(extractUsernames(followers), contains("rogerkver"));
+    assertThat(followers, hasSize(followers().length));
+    assertThat(extractUsernames(followers), containsInAnyOrder(followers()));
   }
 
   @Test
@@ -30,7 +30,7 @@ public class UserControllerIntegrationTest extends RestIntegrationTest {
     ResponseEntity<UserDTO[]> response = withAuthTestRestTemplate().getForEntity("/following", UserDTO[].class);
     assertThat(response.getStatusCode().is2xxSuccessful(), is(true));
     List<UserDTO> following = Arrays.asList(response.getBody());
-    assertThat(following, hasSize(4));
+    assertThat(following, hasSize(followingUsers().length));
     assertThat(extractUsernames(following), containsInAnyOrder(followingUsers()));
   }
 
