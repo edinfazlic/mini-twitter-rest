@@ -28,8 +28,9 @@ public class UserService implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     User user = getUser(username);
-    if (user == null)
+    if (user == null) {
       throw new UsernameNotFoundException(username);
+    }
     return user;
   }
 
