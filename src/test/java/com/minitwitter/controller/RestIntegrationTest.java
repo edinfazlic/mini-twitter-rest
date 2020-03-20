@@ -12,18 +12,36 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 public abstract class RestIntegrationTest {
 
+  private static final String AUTH_USERNAME = "aantonop";
+  private static final int OWN_TWEETS_COUNT = 3;
+  private static final int FOLLOWERS_COUNT = 1;
+  private static final String[] FOLLOWING_USERS = new String[]{"rogerkver", "satoshiNakamoto", "SatoshiLite", "VitalikButerin"};
+  private static final String[] FOLLOWERS = new String[]{"rogerkver"};
+
   @Autowired
   private TestRestTemplate testRestTemplate;
 
   TestRestTemplate withAuthTestRestTemplate() {
-    return testRestTemplate.withBasicAuth("aantonop", "password");
+    return testRestTemplate.withBasicAuth(AUTH_USERNAME, "password");
   }
 
   String getUsernameOfAuthUser() {
-    return "aantonop";
+    return AUTH_USERNAME;
   }
 
   String[] followingUsers() {
-    return new String[]{"rogerkver", "satoshiNakamoto", "SatoshiLite", "VitalikButerin"};
+    return FOLLOWING_USERS;
+  }
+
+  String[] followers() {
+    return FOLLOWERS;
+  }
+
+  int ownTweetsCount() {
+    return OWN_TWEETS_COUNT;
+  }
+
+  int followersCount() {
+    return FOLLOWERS_COUNT;
   }
 }

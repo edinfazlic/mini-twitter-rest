@@ -1,10 +1,9 @@
 package com.minitwitter.controller;
 
 import com.minitwitter.domain.dto.ErrorMessage;
+import com.minitwitter.domain.dto.TweetDTO;
 import com.minitwitter.service.TweetService;
 import com.minitwitter.service.TweetService.InvalidTweetException;
-import com.minitwitter.service.TweetService.UnknownUsernameException;
-import com.minitwitter.domain.dto.TweetDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +23,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RestController
 @RequestMapping("tweets")
 @Slf4j
-public class TweetController {
+public class TweetController extends ExceptionHandlingController {
 
   private TweetService tweetService;
 
@@ -46,13 +45,6 @@ public class TweetController {
   @GetMapping(value = "{username}")
   public Collection<TweetDTO> tweetsFromUser(@PathVariable String username) {
     return tweetService.tweetsFromUser(username);
-  }
-
-  @ExceptionHandler
-  @ResponseStatus(BAD_REQUEST)
-  public ErrorMessage handleUnknownUsernameException(UnknownUsernameException e) {
-    log.warn("", e);
-    return new ErrorMessage(String.format("Unknown user '%s'", e.getUsername()));
   }
 
   @ExceptionHandler
