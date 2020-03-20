@@ -1,9 +1,9 @@
 package com.minitwitter.controller;
 
-import com.minitwitter.domain.dto.ErrorMessage;
 import com.minitwitter.domain.Tweet;
-import com.minitwitter.repository.TweetRepository;
+import com.minitwitter.domain.dto.ErrorMessage;
 import com.minitwitter.domain.dto.TweetDTO;
+import com.minitwitter.repository.TweetRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

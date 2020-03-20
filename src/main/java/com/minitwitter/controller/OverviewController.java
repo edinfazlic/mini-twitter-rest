@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("overview")
 @Slf4j
-public class OverviewController extends ExceptionHandlingController{
+public class OverviewController extends ExceptionHandlingController {
 
   private OverviewService overviewService;
 
@@ -20,8 +20,8 @@ public class OverviewController extends ExceptionHandlingController{
   }
 
   @GetMapping(value = "{username}")
-  public UserOverviewDTO followers(@PathVariable String username) {
-    return overviewService.getUsersFollowers(username);
+  public UserOverviewDTO userOverview(@PathVariable String username) {
+    return overviewService.getUserOverview(username);
   }
 
 }

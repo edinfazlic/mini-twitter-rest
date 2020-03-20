@@ -1,8 +1,8 @@
 package com.minitwitter.service;
 
 import com.minitwitter.domain.User;
-import com.minitwitter.repository.UserRepository;
 import com.minitwitter.domain.dto.UserDTO;
+import com.minitwitter.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
