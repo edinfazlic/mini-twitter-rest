@@ -1,6 +1,6 @@
 package com.minitwitter.domain;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 
 @Entity
-@Data
+@Getter
 @NoArgsConstructor(access = PRIVATE)
 public class Tweet {
   protected static final int TWEET_MAX_LENGTH = 140;

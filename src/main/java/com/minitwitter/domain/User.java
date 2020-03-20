@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +26,6 @@ import static lombok.AccessLevel.PRIVATE;
 @Entity
 @Getter
 @NoArgsConstructor(access = PRIVATE)
-@ToString(exclude = {"following", "followers"})
 @EqualsAndHashCode(exclude = {"following", "followers"})
 public class User implements UserDetails {
   public static final List<SimpleGrantedAuthority> AUTHORITIES = singletonList(new SimpleGrantedAuthority("USER"));

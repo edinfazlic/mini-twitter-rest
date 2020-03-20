@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @Slf4j
@@ -24,6 +25,7 @@ public class AuthController {
   }
 
   @PostMapping("/signup")
+  @ResponseStatus(CREATED)
   public UserDTO registerUser(@RequestBody AuthUserDTO user) {
     return authService.registerUser(user);
   }
