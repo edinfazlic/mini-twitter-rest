@@ -21,7 +21,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
-@RequestMapping("tweets")
+@RequestMapping("tweet")
 @Slf4j
 public class TweetController extends ExceptionHandlingController {
 

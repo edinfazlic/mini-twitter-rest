@@ -1,6 +1,7 @@
 package com.minitwitter.service;
 
 import com.minitwitter.domain.User;
+import com.minitwitter.domain.dto.FollowInfoUserDTO;
 import com.minitwitter.domain.dto.UserDTO;
 import com.minitwitter.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,6 +45,20 @@ public class UserService implements UserDetailsService {
   public Collection<UserDTO> getUsersFollowers(Principal principal) {
     User user = getUser(principal.getName());
     return convertUsersToDTOs(user.getFollowers());
+  }
+
+  @Transactional
+  public Collection<FollowInfoUserDTO> searchUsers(String searchString, Principal principal) {
+    User user = getUser(principal.getName());
+    Collection<User> allUsersFiltered = userRepository.findByUsernameFirstNameLastName(searchString);
+
+    return allUsersFiltered.stream()
+      .map(filteredUser -> {
+        final FollowInfoUserDTO followInfoUserDTO = new FollowInfoUserDTO(filteredUser);
+        followInfoUserDTO.setFollowing(user.getFollowing().stream().anyMatch(usr -> usr.getId().equals(filteredUser.getId())));
+        followInfoUserDTO.setFollower(user.getFollowers().stream().anyMatch(usr -> usr.getId().equals(filteredUser.getId())));
+        return followInfoUserDTO;
+      }).collect(toList());
   }
 
   private User getUser(String username) {
