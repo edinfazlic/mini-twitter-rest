@@ -1,14 +1,18 @@
 package com.minitwitter.controller;
 
+import com.minitwitter.domain.dto.FollowInfoUserDTO;
 import com.minitwitter.domain.dto.UserDTO;
 import com.minitwitter.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 import java.util.Collection;
 
 @RestController
+@RequestMapping("user")
 public class UserController {
 
   private UserService userService;
@@ -25,5 +29,10 @@ public class UserController {
   @GetMapping("/following")
   public Collection<UserDTO> following(Principal principal) {
     return userService.getUsersFollowing(principal);
+  }
+
+  @GetMapping()
+  public Collection<FollowInfoUserDTO> search(@RequestParam String searchString, Principal principal) {
+    return userService.searchUsers(searchString, principal);
   }
 }

@@ -17,6 +17,8 @@ public abstract class RestIntegrationTest {
   private static final int FOLLOWERS_COUNT = 1;
   private static final String[] FOLLOWING_USERS = new String[]{"rogerkver", "satoshiNakamoto", "SatoshiLite", "VitalikButerin"};
   private static final String[] FOLLOWERS = new String[]{"rogerkver"};
+  public static final String SEARCH_STRING = "er";
+  public static final String[] SEARCHED_USERS_FOUND = new String[]{"rogerkver", "VitalikButerin"};
 
   @Autowired
   private TestRestTemplate testRestTemplate;
@@ -47,5 +49,13 @@ public abstract class RestIntegrationTest {
 
   int followersCount() {
     return FOLLOWERS_COUNT;
+  }
+
+  String searchString() {
+    return SEARCH_STRING;
+  }
+
+  String[] searchedUsersFound() {
+    return SEARCHED_USERS_FOUND;
   }
 }

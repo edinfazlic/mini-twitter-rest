@@ -4,10 +4,8 @@ import com.minitwitter.domain.Tweet;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import static lombok.AccessLevel.PRIVATE;
-
 @Getter
-@NoArgsConstructor(access = PRIVATE)
+@NoArgsConstructor
 public class TweetDTO {
   private Long id;
   private String content;

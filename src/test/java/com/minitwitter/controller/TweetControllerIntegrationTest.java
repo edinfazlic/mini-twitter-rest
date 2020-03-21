@@ -34,7 +34,7 @@ public class TweetControllerIntegrationTest extends RestIntegrationTest {
   }
 
   private ResponseEntity<TweetDTO> doCreateTweetRequest(String tweetContent) {
-    return withAuthTestRestTemplate().postForEntity("/tweets", tweetContent, TweetDTO.class);
+    return withAuthTestRestTemplate().postForEntity("/tweet", tweetContent, TweetDTO.class);
   }
 
   @Test
@@ -50,7 +50,7 @@ public class TweetControllerIntegrationTest extends RestIntegrationTest {
 
   @Test
   public void tweetsFromFollowing_onlyFollowingAuthorsTweetsAreReturned() {
-    ResponseEntity<TweetDTO[]> response = withAuthTestRestTemplate().getForEntity("/tweets", TweetDTO[].class);
+    ResponseEntity<TweetDTO[]> response = withAuthTestRestTemplate().getForEntity("/tweet", TweetDTO[].class);
     assertThat(response.getStatusCode().is2xxSuccessful(), is(true));
     List<String> authors = extractAuthorNames(response.getBody());
     assertThat(authors, hasSize(followingUsers().length));
@@ -59,7 +59,7 @@ public class TweetControllerIntegrationTest extends RestIntegrationTest {
 
   @Test
   public void tweetsFromUser_onlyThatUserTweetsAreReturned() {
-    ResponseEntity<TweetDTO[]> response = withAuthTestRestTemplate().getForEntity("/tweets/{username}",
+    ResponseEntity<TweetDTO[]> response = withAuthTestRestTemplate().getForEntity("/tweet/{username}",
       TweetDTO[].class, Collections.singletonMap("username", getUsernameOfAuthUser()));
     assertThat(response.getStatusCode().is2xxSuccessful(), is(true));
     List<String> authors = extractAuthorNames(response.getBody());
@@ -69,7 +69,7 @@ public class TweetControllerIntegrationTest extends RestIntegrationTest {
 
   @Test
   public void tweetsFromUserWithWrongUsername_badRequestReturned() {
-    ResponseEntity<ErrorMessage> response = withAuthTestRestTemplate().getForEntity("/tweets/{username}",
+    ResponseEntity<ErrorMessage> response = withAuthTestRestTemplate().getForEntity("/tweet/{username}",
       ErrorMessage.class, Collections.singletonMap("username", "unknown"));
     assertThat(response.getStatusCode(), is(HttpStatus.BAD_REQUEST));
     assertThat(response.getBody().getMessage(), containsString("unknown"));
