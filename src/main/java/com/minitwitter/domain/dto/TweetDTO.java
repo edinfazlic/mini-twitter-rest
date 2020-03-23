@@ -9,13 +9,11 @@ import lombok.NoArgsConstructor;
 public class TweetDTO {
   private Long id;
   private String content;
-  private String authorUsername;
-  private String author;
+  private UserDTO author;
 
   public TweetDTO(Tweet tweet) {
     this.id = tweet.getId();
     this.content = tweet.getContent();
-    this.authorUsername = tweet.getAuthor().getUsername();
-    this.author = tweet.getAuthor().getFormattedString();
+    this.author = new UserDTO(tweet.getAuthor());
   }
 }
