@@ -90,8 +90,4 @@ public class User implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
-
-  public String getFormattedString() {
-    return firstName + (lastName == null || lastName.isEmpty() ? "" : " " + lastName) + " (" + username + ")";
-  }
 }

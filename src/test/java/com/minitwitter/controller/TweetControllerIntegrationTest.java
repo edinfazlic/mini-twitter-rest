@@ -45,7 +45,7 @@ public class TweetControllerIntegrationTest extends RestIntegrationTest {
     Tweet fromDb = tweetRepository.findOne(tweet.getId());
     assertThat(fromDb, notNullValue());
     assertThat(fromDb.getContent(), equalTo(tweet.getContent()));
-    assertThat(fromDb.getAuthor().getUsername(), equalTo(tweet.getAuthorUsername()));
+    assertThat(fromDb.getAuthor().getUsername(), equalTo(tweet.getAuthor().getUsername()));
   }
 
   @Test
@@ -76,6 +76,6 @@ public class TweetControllerIntegrationTest extends RestIntegrationTest {
   }
 
   private List<String> extractAuthorNames(TweetDTO[] body) {
-    return Arrays.stream(body).map(TweetDTO::getAuthorUsername).distinct().collect(toList());
+    return Arrays.stream(body).map(tweetDTO -> tweetDTO.getAuthor().getUsername()).distinct().collect(toList());
   }
 }

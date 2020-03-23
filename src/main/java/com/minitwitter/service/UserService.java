@@ -1,7 +1,6 @@
 package com.minitwitter.service;
 
 import com.minitwitter.domain.User;
-import com.minitwitter.domain.dto.FollowInfoUserDTO;
 import com.minitwitter.domain.dto.UserDTO;
 import com.minitwitter.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +12,6 @@ import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
 
@@ -48,24 +46,16 @@ public class UserService implements UserDetailsService {
   }
 
   @Transactional
-  public Collection<FollowInfoUserDTO> searchUsers(String searchString, Principal principal) {
-    User user = getUser(principal.getName());
+  public Collection<UserDTO> searchUsers(String searchString) {
     Collection<User> allUsersFiltered = userRepository.findByUsernameFirstNameLastName(searchString);
-
-    return allUsersFiltered.stream()
-      .map(filteredUser -> {
-        final FollowInfoUserDTO followInfoUserDTO = new FollowInfoUserDTO(filteredUser);
-        followInfoUserDTO.setFollowing(user.getFollowing().stream().anyMatch(usr -> usr.getId().equals(filteredUser.getId())));
-        followInfoUserDTO.setFollower(user.getFollowers().stream().anyMatch(usr -> usr.getId().equals(filteredUser.getId())));
-        return followInfoUserDTO;
-      }).collect(toList());
+    return convertUsersToDTOs(allUsersFiltered);
   }
 
   private User getUser(String username) {
     return userRepository.findOneByUsername(username);
   }
 
-  private List<UserDTO> convertUsersToDTOs(Set<User> users) {
+  private List<UserDTO> convertUsersToDTOs(Collection<User> users) {
     return users.stream().map(UserDTO::new).collect(toList());
   }
 }
