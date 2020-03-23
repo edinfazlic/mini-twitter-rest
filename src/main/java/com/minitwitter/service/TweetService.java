@@ -43,10 +43,6 @@ public class TweetService extends ExceptionHandlingService {
     return new TweetDTO(saved);
   }
 
-  private User getUser(Principal principal) {
-    return getUser(principal.getName());
-  }
-
   private List<TweetDTO> tweetsFromUser(User user) {
     return tweetRepository.findAllByAuthor(user).stream().map(TweetDTO::new).collect(toList());
   }

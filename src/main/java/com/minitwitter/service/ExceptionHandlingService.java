@@ -5,16 +5,22 @@ import com.minitwitter.repository.UserRepository;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+
 @Service
 public abstract class ExceptionHandlingService {
 
   private UserRepository userRepository;
 
-  public ExceptionHandlingService(UserRepository userRepository) {
+  protected ExceptionHandlingService(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
 
-  protected User getUser(String username) {
+  protected User getUser(Principal principal) {
+    return userRepository.findOneByUsername(principal.getName());
+  }
+
+  protected User getUser(String username) throws UnknownUsernameException {
     User user = userRepository.findOneByUsername(username);
     if (user != null) {
       return user;

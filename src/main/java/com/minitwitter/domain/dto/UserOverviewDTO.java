@@ -7,6 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public class UserOverviewDTO {
   private int tweets;
-  private int followers;
-  private int following;
+  private int totalFollowers;
+  private int totalFollowing;
+  private boolean follower;
+  private boolean following;
 }

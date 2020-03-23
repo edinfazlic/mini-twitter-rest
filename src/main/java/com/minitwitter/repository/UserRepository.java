@@ -10,6 +10,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
   /**
    * Use instead:
+   *
    * @see UserRepository#findByUsernameFirstNameLastName
    */
   Collection<User> findByUsernameContainingIgnoreCaseOrFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String username, String firstName, String lastName);

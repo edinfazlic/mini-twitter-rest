@@ -1,21 +1,19 @@
 package com.minitwitter.service;
 
+import com.minitwitter.IntegrationTest;
+import com.minitwitter.service.ExceptionHandlingService.UnknownUsernameException;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceTest {
+public class UserServiceTest extends IntegrationTest {
 
   @Autowired
   private UserService userService;
 
-  @Test(expected = UsernameNotFoundException.class)
-  public void loadingUserWithUnknownUsername_UsernameNotFoundExceptionThrown() {
-    userService.loadUserByUsername("unknownUser");
+  @Test(expected = UnknownUsernameException.class)
+  public void loadingUserWithUnknownUsername_UnknownUsernameExceptionThrown() {
+    userService.loadUserByUsername(unknownUsername());
   }
 }

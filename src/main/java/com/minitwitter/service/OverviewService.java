@@ -7,6 +7,7 @@ import com.minitwitter.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.security.Principal;
 
 @Service
 public class OverviewService extends ExceptionHandlingService {
@@ -19,14 +20,23 @@ public class OverviewService extends ExceptionHandlingService {
   }
 
   @Transactional
-  public UserOverviewDTO getUserOverview(String username) {
+  public UserOverviewDTO getUserOverview(String username, Principal principal) {
+    User user = this.getUser(username);
     int tweets = this.tweetRepository.countByAuthorUsername(username);
 
-    User user = this.getUser(username);
-    int followers = user.getFollowers().size();
-    int following = user.getFollowing().size();
+    int totalFollowers = user.getFollowers().size();
+    int totalFollowing = user.getFollowing().size();
+    boolean isFollower;
+    boolean isFollowing;
+    if (principal.getName().equals(username)) {
+      isFollower = false;
+      isFollowing = false;
+    } else {
+      isFollower = user.getFollowing().stream().anyMatch(usr -> principal.getName().equals(usr.getUsername()));
+      isFollowing = user.getFollowers().stream().anyMatch(usr -> principal.getName().equals(usr.getUsername()));
+    }
 
-    return new UserOverviewDTO(tweets, followers, following);
+    return new UserOverviewDTO(tweets, totalFollowers, totalFollowing, isFollower, isFollowing);
   }
 
 }

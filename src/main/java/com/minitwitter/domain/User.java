@@ -65,6 +65,10 @@ public class User implements UserDetails {
     following.addAll(Arrays.asList(users));
   }
 
+  public void removeFollowing(User... users) {
+    following.removeAll(Arrays.asList(users));
+  }
+
   @Override
   @JsonIgnore
   public Collection<? extends GrantedAuthority> getAuthorities() {
