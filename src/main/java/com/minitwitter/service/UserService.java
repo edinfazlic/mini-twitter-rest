@@ -27,11 +27,7 @@ public class UserService extends ExceptionHandlingService implements UserDetails
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = getUser(username);
-    if (user == null) {
-      throw new UsernameNotFoundException(username);
-    }
-    return user;
+    return getUser(username);
   }
 
   @Transactional

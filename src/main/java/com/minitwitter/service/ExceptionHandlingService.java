@@ -12,7 +12,7 @@ public abstract class ExceptionHandlingService {
 
   private UserRepository userRepository;
 
-  public ExceptionHandlingService(UserRepository userRepository) {
+  protected ExceptionHandlingService(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
 
@@ -20,7 +20,7 @@ public abstract class ExceptionHandlingService {
     return userRepository.findOneByUsername(principal.getName());
   }
 
-  protected User getUser(String username) {
+  protected User getUser(String username) throws UnknownUsernameException {
     User user = userRepository.findOneByUsername(username);
     if (user != null) {
       return user;

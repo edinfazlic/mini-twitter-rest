@@ -21,9 +21,9 @@ public class OverviewService extends ExceptionHandlingService {
 
   @Transactional
   public UserOverviewDTO getUserOverview(String username, Principal principal) {
+    User user = this.getUser(username);
     int tweets = this.tweetRepository.countByAuthorUsername(username);
 
-    User user = this.getUser(username);
     int totalFollowers = user.getFollowers().size();
     int totalFollowing = user.getFollowing().size();
     boolean isFollower;
