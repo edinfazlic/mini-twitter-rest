@@ -16,9 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 public class UserControllerIntegrationTest extends RestIntegrationTest {
@@ -53,8 +51,10 @@ public class UserControllerIntegrationTest extends RestIntegrationTest {
     ResponseEntity<UserDTO[]> response = withAuthTestRestTemplate().getForEntity("/user?searchString=" + searchString, UserDTO[].class);
     assertThat(response.getStatusCode().is2xxSuccessful(), is(true));
     List<UserDTO> users = Arrays.asList(response.getBody());
+    final List<String> usernames = extractUsernames(users);
+    assertThat(usernameOfAuthUser(), not(isIn(usernames)));
     Collection<User> dbUsers = userRepository.findByUsernameFirstNameLastName(searchString);
-    assertThat(extractUsernames(users), containsInAnyOrder(extractUsernames(dbUsers)));
+    assertThat(usernames, containsInAnyOrder(extractUsernames(dbUsers)));
   }
 
   @Test

@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -43,8 +44,10 @@ public class UserService extends ExceptionHandlingService implements UserDetails
   }
 
   @Transactional
-  public Collection<UserDTO> searchUsers(String searchString) {
+  public Collection<UserDTO> searchUsers(String searchString, Principal principal) {
+    String loggedUser = principal.getName();
     Collection<User> allUsersFiltered = userRepository.findByUsernameFirstNameLastName(searchString);
+    allUsersFiltered = allUsersFiltered.stream().filter(user -> !loggedUser.equals(user.getUsername())).collect(Collectors.toList());
     return convertUsersToDTOs(allUsersFiltered);
   }
 

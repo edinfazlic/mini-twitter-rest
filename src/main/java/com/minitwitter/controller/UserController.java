@@ -33,8 +33,8 @@ public class UserController extends ExceptionHandlingController {
   }
 
   @GetMapping()
-  public Collection<UserDTO> search(@RequestParam String searchString) {
-    return userService.searchUsers(searchString);
+  public Collection<UserDTO> search(@RequestParam String searchString, Principal principal) {
+    return userService.searchUsers(searchString, principal);
   }
 
   @PostMapping("/follow/{username}")
