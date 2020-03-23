@@ -31,13 +31,13 @@ public class TweetController extends ExceptionHandlingController {
     this.tweetService = tweetService;
   }
 
-  @PostMapping
+  @PostMapping()
   @ResponseStatus(CREATED)
   public TweetDTO tweet(@RequestBody String tweet, Principal principal) {
     return tweetService.createTweet(tweet, principal);
   }
 
-  @GetMapping
+  @GetMapping()
   public Collection<TweetDTO> followingUsersTweets(Principal principal) {
     return tweetService.followingUsersTweets(principal);
   }

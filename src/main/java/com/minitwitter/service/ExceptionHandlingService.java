@@ -5,6 +5,8 @@ import com.minitwitter.repository.UserRepository;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+
 @Service
 public abstract class ExceptionHandlingService {
 
@@ -12,6 +14,10 @@ public abstract class ExceptionHandlingService {
 
   public ExceptionHandlingService(UserRepository userRepository) {
     this.userRepository = userRepository;
+  }
+
+  protected User getUser(Principal principal) {
+    return userRepository.findOneByUsername(principal.getName());
   }
 
   protected User getUser(String username) {

@@ -16,11 +16,12 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService extends ExceptionHandlingService implements UserDetailsService {
 
   private UserRepository userRepository;
 
   public UserService(UserRepository userRepository) {
+    super(userRepository);
     this.userRepository = userRepository;
   }
 
@@ -35,13 +36,13 @@ public class UserService implements UserDetailsService {
 
   @Transactional
   public Collection<UserDTO> getUsersFollowing(Principal principal) {
-    User user = getUser(principal.getName());
+    User user = getUser(principal);
     return convertUsersToDTOs(user.getFollowing());
   }
 
   @Transactional
   public Collection<UserDTO> getUsersFollowers(Principal principal) {
-    User user = getUser(principal.getName());
+    User user = getUser(principal);
     return convertUsersToDTOs(user.getFollowers());
   }
 
@@ -51,8 +52,20 @@ public class UserService implements UserDetailsService {
     return convertUsersToDTOs(allUsersFiltered);
   }
 
-  private User getUser(String username) {
-    return userRepository.findOneByUsername(username);
+  @Transactional
+  public void follow(String username, Principal principal) {
+    User user = getUser(principal);
+    User followedUser = getUser(username);
+    user.addFollowing(followedUser);
+    userRepository.save(user);
+  }
+
+  @Transactional
+  public void unfollow(String username, Principal principal) {
+    User user = getUser(principal);
+    User followedUser = getUser(username);
+    user.removeFollowing(followedUser);
+    userRepository.save(user);
   }
 
   private List<UserDTO> convertUsersToDTOs(Collection<User> users) {

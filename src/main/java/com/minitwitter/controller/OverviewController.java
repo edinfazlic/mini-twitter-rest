@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("overview")
 @Slf4j
@@ -20,8 +22,8 @@ public class OverviewController extends ExceptionHandlingController {
   }
 
   @GetMapping(value = "{username}")
-  public UserOverviewDTO userOverview(@PathVariable String username) {
-    return overviewService.getUserOverview(username);
+  public UserOverviewDTO userOverview(@PathVariable String username, Principal principal) {
+    return overviewService.getUserOverview(username, principal);
   }
 
 }

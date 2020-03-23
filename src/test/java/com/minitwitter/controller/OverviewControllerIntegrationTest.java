@@ -22,8 +22,8 @@ public class OverviewControllerIntegrationTest extends RestIntegrationTest {
     assertThat(response.getStatusCode().is2xxSuccessful(), is(true));
     UserOverviewDTO overview = response.getBody();
     assertThat(overview.getTweets(), equalTo(ownTweetsCount()));
-    assertThat(overview.getFollowers(), equalTo(followersCount()));
-    assertThat(overview.getFollowing(), equalTo(followingUsers().length));
+    assertThat(overview.getTotalFollowers(), equalTo(followersCount()));
+    assertThat(overview.getTotalFollowing(), equalTo(followingUsers().length));
   }
 
   @Test
